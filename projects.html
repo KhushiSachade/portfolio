@@ -7,6 +7,49 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .tab-switcher {
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 50px;
+            padding: 5px;
+            width: fit-content;
+            margin: 0 auto 3rem auto;
+        }
+
+        .tab-btn {
+            padding: 10px 32px;
+            border-radius: 50px;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            letter-spacing: 0.02em;
+        }
+
+        .tab-btn:hover {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .tab-btn.active {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -40,356 +83,408 @@
         <div class="container py-5">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="display-4 fw-light mb-5 text-center">Projects & Skills</h1>
+                    <h1 class="display-4 fw-light mb-4 text-center">Projects & Skills</h1>
                 </div>
             </div>
 
-            <!-- Featured Projects -->
-            <div class="row mb-5">
-                <div class="col-lg-12">
-                    <h2 class="section-title mb-4">
-                        <i class="bi bi-code-slash me-2"></i>Featured Projects
-                    </h2>
-                </div>
+            <!-- Tab Switcher -->
+            <div class="tab-switcher">
+                <button class="tab-btn active" onclick="switchTab('projects', this)">
+                    <i class="bi bi-code-slash me-2"></i>Projects
+                </button>
+                <button class="tab-btn" onclick="switchTab('skills', this)">
+                    <i class="bi bi-gear-fill me-2"></i>Skills
+                </button>
             </div>
 
-            <div class="row g-4 mb-5">
-                <!-- Project 10 -->
-                <div class="col-lg-6">
-                    <div class="glass-card project-card h-100">
-                        <div class="project-icon mb-3">
-                            <i class="bi bi-search"></i>
-                        </div>
-                        <h3 class="h4 mb-3">Intelligent Search Engine</h3>
-                        <div class="tech-tags mb-3">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Elasticsearch</span>
-                            <span class="tech-tag">NLP</span>
-                            <span class="tech-tag">FastAPI</span>
-                        </div>
-                        <p class="mb-3">Engineered a document retrieval system with inverted indexing, relevance scoring, and semantic search across 50K+ documents.</p>
-                        <ul class="project-features">
-                            <li>Optimized retrieval and ranking pipelines, reducing query latency by 40%</li>
-                            <li>Improved top-k search relevance by 25% through semantic search integration</li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Project 1 -->
-                <div class="col-lg-6">
-                    <div class="glass-card project-card h-100">
-                        <div class="project-icon mb-3">
-                            <i class="bi bi-envelope-paper"></i>
-                        </div>
-                        <h3 class="h4 mb-3">Cold Email Generation Tool</h3>
-                        <div class="tech-tags mb-3">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">LangChain</span>
-                            <span class="tech-tag">ChromaDB</span>
-                            <span class="tech-tag">OpenAI</span>
-                        </div>
-                        <p class="mb-3">Engineered a GenAI-powered automation pipeline integrating LLMs and semantic retrieval to personalize job outreach.</p>
-                        <ul class="project-features">
-                            <li>Implemented vector database indexing and inference workflows</li>
-                            <li>Boosted outreach efficiency by 30%</li>
-                        </ul>
-                    </div>
-                </div>
+            <!-- Projects Tab -->
+            <div id="tab-projects" class="tab-panel active">
 
-                <!-- Project 2 -->
-                <div class="col-lg-6">
-                    <div class="glass-card project-card h-100">
-                        <div class="project-icon mb-3">
-                            <i class="bi bi-lightning-charge"></i>
-                        </div>
-                        <h3 class="h4 mb-3">EV Management Database System</h3>
-                        <div class="tech-tags mb-3">
-                            <span class="tech-tag">SQL</span>
-                            <span class="tech-tag">Database Design</span>
-                        </div>
-                        <p class="mb-3">Designed a normalized relational schema for 10K+ electric vehicles, 100+ charging stations, and maintenance workflows.</p>
-                        <ul class="project-features">
-                            <li>Implemented triggers, stored procedures, and predictive queries</li>
-                            <li>Improved system uptime by 15%</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="col-lg-6">
-                    <div class="glass-card project-card h-100">
-                        <div class="project-icon mb-3">
-                            <i class="bi bi-cart"></i>
-                        </div>
-                        <h3 class="h4 mb-3">Virtual Cart App</h3>
-                        <div class="tech-tags mb-3">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">REST API</span>
-                        </div>
-                        <p class="mb-3">Delivered a full-stack eCommerce application with real-time cart management and dynamic product recommendations.</p>
-                        <ul class="project-features">
-                            <li>Integrated secure REST APIs with responsive UI</li>
-                            <li>Improved user experience with 25% faster load times</li>
-                            <li>Implemented routing logic and state-based rendering</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Project 4 -->
-                <div class="col-lg-6">
-                    <div class="glass-card project-card h-100">
-                        <div class="project-icon mb-3">
-                            <i class="bi bi-graph-up"></i>
-                        </div>
-                        <h3 class="h4 mb-3">School Performance Analysis in Phoenix</h3>
-                        <div class="tech-tags mb-3">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Machine Learning</span>
-                            <span class="tech-tag">Data Analysis</span>
-                        </div>
-                        <p class="mb-3">Trained classification models to analyze academic performance data from 200+ schools, providing actionable insights for educational policy.</p>
-                        <ul class="project-features">
-                            <li>Trained classification models reaching 97% accuracy on academic data</li>
-                            <li>Visualized insights for stakeholders, influencing policy revisions on under-performing districts</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Project 5 -->
-                <div class="col-lg-6">
-                    <div class="glass-card project-card h-100">
-                        <div class="project-icon mb-3">
-                            <i class="bi bi-heart-pulse"></i>
-                        </div>
-                        <h3 class="h4 mb-3">Sleep Health & Lifestyle Dashboard</h3>
-                        <div class="tech-tags mb-3">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Tableau</span>
-                            <span class="tech-tag">Data Visualization</span>
-                        </div>
-                        <p class="mb-3">Built an interactive dashboard with dynamic filters to visualize lifestyle trends and health insights from comprehensive sleep data.</p>
-                        <ul class="project-features">
-                            <li>Built interactive dashboard with dynamic filters (age, occupation, disorder type) used by 100+ users</li>
-                            <li>Cleaned and modeled data from 374 records, presenting patterns driving a 15% rise in awareness</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Project 6 -->
-                <div class="col-lg-6">
-                    <div class="glass-card project-card h-100">
-                        <div class="project-icon mb-3">
-                            <i class="bi bi-image"></i>
-                        </div>
-                        <h3 class="h4 mb-3">Image Resizer</h3>
-                        <div class="tech-tags mb-3">
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">Canvas API</span>
-                            <span class="tech-tag">Web Performance</span>
-                        </div>
-                        <p class="mb-3">Created a real-time image resizer app with responsive interface for efficient image compression and optimization.</p>
-                        <ul class="project-features">
-                            <li>Created real-time image resizer with responsive interface using JavaScript libraries, Canvas, and Blob</li>
-                            <li>Reduced image sizes by 75% and improved page load times by 20%, boosting user satisfaction by 15%</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Project 7 -->
-                <div class="col-lg-6">
-                    <div class="glass-card project-card h-100">
-                        <div class="project-icon mb-3">
-                            <i class="bi bi-shield-lock"></i>
-                        </div>
-                        <h3 class="h4 mb-3">SecureProfile</h3>
-                        <div class="tech-tags mb-3">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">Authentication</span>
-                        </div>
-                        <p class="mb-3">Built secure login and registration workflows with robust client-side validation and authentication safeguards.</p>
-                        <ul class="project-features">
-                            <li>Built secure login and registration workflows with robust client-side validation and authentication safeguards</li>
-                            <li>Implemented error-handling logic that reduced failed login attempts by 95% and improved overall account access reliability</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Project 8 -->
-                <div class="col-lg-6">
-                    <div class="glass-card project-card h-100">
-                        <div class="project-icon mb-3">
-                            <i class="bi bi-shop"></i>
-                        </div>
-                        <h3 class="h4 mb-3">Product Rental Platform</h3>
-                        <div class="tech-tags mb-3">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Django</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">SQLite</span>
-                        </div>
-                        <p class="mb-3">Developed a multi-vendor rental platform enabling product listing, discovery, and seamless booking across categories.</p>
-                        <ul class="project-features">
-                            <li>Developed a multi-vendor rental platform enabling product listing, discovery, and seamless booking across categories</li>
-                            <li>Built search, filtering, and feedback/rating features that improved product discoverability and user trust</li>
-                            <li>Implemented a responsive frontend with Django templates, HTML/CSS, and Bootstrap to enhance usability across devices</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Project 9 -->
-                <div class="col-lg-6">
-                    <div class="glass-card project-card h-100">
-                        <div class="project-icon mb-3">
-                            <i class="bi bi-cash-stack"></i>
-                        </div>
-                        <h3 class="h4 mb-3">Income & Expenditure Tracker</h3>
-                        <div class="tech-tags mb-3">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Matplotlib</span>
-                            <span class="tech-tag">File I/O</span>
-                        </div>
-                        <p class="mb-3">Created an interactive personal finance tracker that visualizes income and spending patterns via bar-chart reporting.</p>
-                        <ul class="project-features">
-                            <li>Created an interactive personal finance tracker that visualizes 3-month income and spending patterns via bar-chart reporting</li>
-                            <li>Automated data logging with timestamped storage, enabling users to maintain consistent financial records</li>
-                            <li>Delivered a lightweight, user-friendly interface optimized for quick insights and recurring budget reviews</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Leadership Section -->
-            <div class="row mt-5 mb-5">
-                <div class="col-lg-12">
-                    <h2 class="section-title mb-4">
-                        <i class="bi bi-people-fill me-2"></i>Leadership & Volunteer Experience
-                    </h2>
-                </div>
-            </div>
-
-            <div class="row g-4 mb-5">
-                <div class="col-lg-12">
-                    <div class="glass-card project-card">
-                        <div class="project-icon mb-3">
-                            <i class="bi bi-people"></i>
-                        </div>
-                        <h3 class="h4 mb-3">IEEE Leadership & Volunteer</h3>
-                        <div class="tech-tags mb-3">
-                            <span class="tech-tag">Leadership</span>
-                            <span class="tech-tag">Event Management</span>
-                            <span class="tech-tag">Mentorship</span>
-                        </div>
-                        <p class="mb-3">Led cross-functional initiatives and mentorship programs for academic and professional development.</p>
-                        <ul class="project-features">
-                            <li>Distilled complex project outcomes into executive-ready reports</li>
-                            <li>Directed 10+ cross-functional events for 200+ members</li>
-                            <li>Achieved 40% participation increase through organized planning</li>
-                            <li>Led mentorship initiatives connecting junior members with industry professionals</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Technical Skills -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="glass-card">
+                <!-- Featured Projects -->
+                <div class="row mb-4">
+                    <div class="col-lg-12">
                         <h2 class="section-title mb-4">
-                            <i class="bi bi-gear-fill me-2"></i>Technical Skills
+                            <i class="bi bi-code-slash me-2"></i>Featured Projects
                         </h2>
-                        <div class="row">
-                            <div class="col-md-6 col-lg-4 mb-4">
-                                <div class="skill-box">
-                                    <h5 class="skill-category mb-3">
-                                        <i class="bi bi-code-square me-2"></i>Programming Languages
-                                    </h5>
-                                    <div class="skill-items">
-                                        <span class="skill-item">Python</span>
-                                        <span class="skill-item">JavaScript</span>
-                                        <span class="skill-item">TypeScript</span>
-                                        <span class="skill-item">Swift</span>
-                                    </div>
-                                </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 mb-5">
+                    <!-- Project 10 -->
+                    <div class="col-lg-6">
+                        <div class="glass-card project-card h-100">
+                            <div class="project-icon mb-3">
+                                <i class="bi bi-search"></i>
                             </div>
-                            <div class="col-md-6 col-lg-4 mb-4">
-                                <div class="skill-box">
-                                    <h5 class="skill-category mb-3">
-                                        <i class="bi bi-stack me-2"></i>Frameworks & Libraries
-                                    </h5>
-                                    <div class="skill-items">
-                                        <span class="skill-item">React</span>
-                                        <span class="skill-item">Node.js</span>
-                                        <span class="skill-item">Django</span>
-                                        <span class="skill-item">jQuery</span>
-                                    </div>
-                                </div>
+                            <h3 class="h4 mb-3">Intelligent Search Engine</h3>
+                            <div class="tech-tags mb-3">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Elasticsearch</span>
+                                <span class="tech-tag">NLP</span>
+                                <span class="tech-tag">FastAPI</span>
                             </div>
-                            <div class="col-md-6 col-lg-4 mb-4">
-                                <div class="skill-box">
-                                    <h5 class="skill-category mb-3">
-                                        <i class="bi bi-cloud me-2"></i>Cloud & DevOps
-                                    </h5>
-                                    <div class="skill-items">
-                                        <span class="skill-item">AWS</span>
-                                        <span class="skill-item">Docker</span>
-                                        <span class="skill-item">CI/CD</span>
-                                        <span class="skill-item">REST</span>
-                                        <span class="skill-item">GraphQL</span>
-                                    </div>
-                                </div>
+                            <p class="mb-3">Engineered a document retrieval system with inverted indexing, relevance scoring, and semantic search across 50K+ documents.</p>
+                            <ul class="project-features">
+                                <li>Optimized retrieval and ranking pipelines, reducing query latency by 40%</li>
+                                <li>Improved top-k search relevance by 25% through semantic search integration</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Project 1 -->
+                    <div class="col-lg-6">
+                        <div class="glass-card project-card h-100">
+                            <div class="project-icon mb-3">
+                                <i class="bi bi-envelope-paper"></i>
                             </div>
-                            <div class="col-md-6 col-lg-4 mb-4">
-                                <div class="skill-box">
-                                    <h5 class="skill-category mb-3">
-                                        <i class="bi bi-database me-2"></i>Databases & Analytics
-                                    </h5>
-                                    <div class="skill-items">
-                                        <span class="skill-item">MySQL</span>
-                                        <span class="skill-item">MongoDB</span>
-                                        <span class="skill-item">Spark</span>
-                                        <span class="skill-item">Databricks</span>
-                                        <span class="skill-item">Tableau</span>
-                                        <span class="skill-item">Pandas</span>
-                                    </div>
-                                </div>
+                            <h3 class="h4 mb-3">Cold Email Generation Tool</h3>
+                            <div class="tech-tags mb-3">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">LangChain</span>
+                                <span class="tech-tag">ChromaDB</span>
+                                <span class="tech-tag">OpenAI</span>
                             </div>
-                            <div class="col-md-6 col-lg-4 mb-4">
-                                <div class="skill-box">
-                                    <h5 class="skill-category mb-3">
-                                        <i class="bi bi-tools me-2"></i>Tools & Methodologies
-                                    </h5>
-                                    <div class="skill-items">
-                                        <span class="skill-item">Agile</span>
-                                        <span class="skill-item">Scrum</span>
-                                        <span class="skill-item">Jira</span>
-                                        <span class="skill-item">Git</span>
-                                        <span class="skill-item">Google Analytics</span>
-                                    </div>
-                                </div>
+                            <p class="mb-3">Engineered a GenAI-powered automation pipeline integrating LLMs and semantic retrieval to personalize job outreach.</p>
+                            <ul class="project-features">
+                                <li>Implemented vector database indexing and inference workflows</li>
+                                <li>Boosted outreach efficiency by 30%</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="col-lg-6">
+                        <div class="glass-card project-card h-100">
+                            <div class="project-icon mb-3">
+                                <i class="bi bi-lightning-charge"></i>
                             </div>
-                            <div class="col-md-6 col-lg-4 mb-4">
-                                <div class="skill-box">
-                                    <h5 class="skill-category mb-3">
-                                        <i class="bi bi-filetype-html me-2"></i>Web Technologies
-                                    </h5>
-                                    <div class="skill-items">
-                                        <span class="skill-item">HTML5</span>
-                                        <span class="skill-item">CSS3</span>
-                                        <span class="skill-item">Bootstrap</span>
-                                        <span class="skill-item">Responsive Design</span>
-                                    </div>
-                                </div>
+                            <h3 class="h4 mb-3">EV Management Database System</h3>
+                            <div class="tech-tags mb-3">
+                                <span class="tech-tag">SQL</span>
+                                <span class="tech-tag">Database Design</span>
                             </div>
+                            <p class="mb-3">Designed a normalized relational schema for 10K+ electric vehicles, 100+ charging stations, and maintenance workflows.</p>
+                            <ul class="project-features">
+                                <li>Implemented triggers, stored procedures, and predictive queries</li>
+                                <li>Improved system uptime by 15%</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="col-lg-6">
+                        <div class="glass-card project-card h-100">
+                            <div class="project-icon mb-3">
+                                <i class="bi bi-cart"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Virtual Cart App</h3>
+                            <div class="tech-tags mb-3">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">REST API</span>
+                            </div>
+                            <p class="mb-3">Delivered a full-stack eCommerce application with real-time cart management and dynamic product recommendations.</p>
+                            <ul class="project-features">
+                                <li>Integrated secure REST APIs with responsive UI</li>
+                                <li>Improved user experience with 25% faster load times</li>
+                                <li>Implemented routing logic and state-based rendering</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="col-lg-6">
+                        <div class="glass-card project-card h-100">
+                            <div class="project-icon mb-3">
+                                <i class="bi bi-graph-up"></i>
+                            </div>
+                            <h3 class="h4 mb-3">School Performance Analysis in Phoenix</h3>
+                            <div class="tech-tags mb-3">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Machine Learning</span>
+                                <span class="tech-tag">Data Analysis</span>
+                            </div>
+                            <p class="mb-3">Trained classification models to analyze academic performance data from 200+ schools, providing actionable insights for educational policy.</p>
+                            <ul class="project-features">
+                                <li>Trained classification models reaching 97% accuracy on academic data</li>
+                                <li>Visualized insights for stakeholders, influencing policy revisions on under-performing districts</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 -->
+                    <div class="col-lg-6">
+                        <div class="glass-card project-card h-100">
+                            <div class="project-icon mb-3">
+                                <i class="bi bi-heart-pulse"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Sleep Health & Lifestyle Dashboard</h3>
+                            <div class="tech-tags mb-3">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Tableau</span>
+                                <span class="tech-tag">Data Visualization</span>
+                            </div>
+                            <p class="mb-3">Built an interactive dashboard with dynamic filters to visualize lifestyle trends and health insights from comprehensive sleep data.</p>
+                            <ul class="project-features">
+                                <li>Built interactive dashboard with dynamic filters (age, occupation, disorder type) used by 100+ users</li>
+                                <li>Cleaned and modeled data from 374 records, presenting patterns driving a 15% rise in awareness</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Project 6 -->
+                    <div class="col-lg-6">
+                        <div class="glass-card project-card h-100">
+                            <div class="project-icon mb-3">
+                                <i class="bi bi-image"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Image Resizer</h3>
+                            <div class="tech-tags mb-3">
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">Canvas API</span>
+                                <span class="tech-tag">Web Performance</span>
+                            </div>
+                            <p class="mb-3">Created a real-time image resizer app with responsive interface for efficient image compression and optimization.</p>
+                            <ul class="project-features">
+                                <li>Created real-time image resizer with responsive interface using JavaScript libraries, Canvas, and Blob</li>
+                                <li>Reduced image sizes by 75% and improved page load times by 20%, boosting user satisfaction by 15%</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Project 7 -->
+                    <div class="col-lg-6">
+                        <div class="glass-card project-card h-100">
+                            <div class="project-icon mb-3">
+                                <i class="bi bi-shield-lock"></i>
+                            </div>
+                            <h3 class="h4 mb-3">SecureProfile</h3>
+                            <div class="tech-tags mb-3">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">Authentication</span>
+                            </div>
+                            <p class="mb-3">Built secure login and registration workflows with robust client-side validation and authentication safeguards.</p>
+                            <ul class="project-features">
+                                <li>Built secure login and registration workflows with robust client-side validation and authentication safeguards</li>
+                                <li>Implemented error-handling logic that reduced failed login attempts by 95% and improved overall account access reliability</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Project 8 -->
+                    <div class="col-lg-6">
+                        <div class="glass-card project-card h-100">
+                            <div class="project-icon mb-3">
+                                <i class="bi bi-shop"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Product Rental Platform</h3>
+                            <div class="tech-tags mb-3">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Django</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">SQLite</span>
+                            </div>
+                            <p class="mb-3">Developed a multi-vendor rental platform enabling product listing, discovery, and seamless booking across categories.</p>
+                            <ul class="project-features">
+                                <li>Developed a multi-vendor rental platform enabling product listing, discovery, and seamless booking across categories</li>
+                                <li>Built search, filtering, and feedback/rating features that improved product discoverability and user trust</li>
+                                <li>Implemented a responsive frontend with Django templates, HTML/CSS, and Bootstrap to enhance usability across devices</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Project 9 -->
+                    <div class="col-lg-6">
+                        <div class="glass-card project-card h-100">
+                            <div class="project-icon mb-3">
+                                <i class="bi bi-cash-stack"></i>
+                            </div>
+                            <h3 class="h4 mb-3">Income & Expenditure Tracker</h3>
+                            <div class="tech-tags mb-3">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Matplotlib</span>
+                                <span class="tech-tag">File I/O</span>
+                            </div>
+                            <p class="mb-3">Created an interactive personal finance tracker that visualizes income and spending patterns via bar-chart reporting.</p>
+                            <ul class="project-features">
+                                <li>Created an interactive personal finance tracker that visualizes 3-month income and spending patterns via bar-chart reporting</li>
+                                <li>Automated data logging with timestamped storage, enabling users to maintain consistent financial records</li>
+                                <li>Delivered a lightweight, user-friendly interface optimized for quick insights and recurring budget reviews</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    
+                </div>
+
+                <!-- Leadership Section -->
+                <div class="row mt-2 mb-4">
+                    <div class="col-lg-12">
+                        <h2 class="section-title mb-4">
+                            <i class="bi bi-people-fill me-2"></i>Leadership & Volunteer Experience
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="row g-4 mb-5">
+                    <div class="col-lg-12">
+                        <div class="glass-card project-card">
+                            <div class="project-icon mb-3">
+                                <i class="bi bi-people"></i>
+                            </div>
+                            <h3 class="h4 mb-3">IEEE Leadership & Volunteer</h3>
+                            <div class="tech-tags mb-3">
+                                <span class="tech-tag">Leadership</span>
+                                <span class="tech-tag">Event Management</span>
+                                <span class="tech-tag">Mentorship</span>
+                            </div>
+                            <p class="mb-3">Led cross-functional initiatives and mentorship programs for academic and professional development.</p>
+                            <ul class="project-features">
+                                <li>Distilled complex project outcomes into executive-ready reports</li>
+                                <li>Directed 10+ cross-functional events for 200+ members</li>
+                                <li>Achieved 40% participation increase through organized planning</li>
+                                <li>Led mentorship initiatives connecting junior members with industry professionals</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
+
             </div>
+            <!-- End Projects Tab -->
+
+            <!-- Skills Tab -->
+            <div id="tab-skills" class="tab-panel">
+                <div class="glass-card">
+                    <div class="row">
+
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="skill-box">
+                                <h5 class="skill-category mb-3">
+                                    <i class="bi bi-code-square me-2"></i>Programming Languages
+                                </h5>
+                                <div class="skill-items">
+                                    <span class="skill-item">Python</span>
+                                    <span class="skill-item">JavaScript</span>
+                                    <span class="skill-item">TypeScript</span>
+                                    <span class="skill-item">Swift</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="skill-box">
+                                <h5 class="skill-category mb-3">
+                                    <i class="bi bi-stack me-2"></i>Frameworks & Libraries
+                                </h5>
+                                <div class="skill-items">
+                                    <span class="skill-item">React</span>
+                                    <span class="skill-item">Node.js</span>
+                                    <span class="skill-item">Django</span>
+                                    <span class="skill-item">FastAPI</span>
+                                    <span class="skill-item">jQuery</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="skill-box">
+                                <h5 class="skill-category mb-3">
+                                    <i class="bi bi-robot me-2"></i>AI & Machine Learning
+                                </h5>
+                                <div class="skill-items">
+                                    <span class="skill-item">Supervised Learning</span>
+                                    <span class="skill-item">NLP</span>
+                                    <span class="skill-item">RAG</span>
+                                    <span class="skill-item">Prompt Engineering</span>
+                                    <span class="skill-item">LangChain</span>
+                                    <span class="skill-item">Vector Embeddings</span>
+                                    <span class="skill-item">Semantic Search</span>
+                                    <span class="skill-item">Inverted Indexing</span>
+                                    <span class="skill-item">Relevance Scoring</span>
+                                    <span class="skill-item">scikit-learn</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="skill-box">
+                                <h5 class="skill-category mb-3">
+                                    <i class="bi bi-cloud me-2"></i>Cloud & DevOps
+                                </h5>
+                                <div class="skill-items">
+                                    <span class="skill-item">AWS</span>
+                                    <span class="skill-item">Docker</span>
+                                    <span class="skill-item">CI/CD</span>
+                                    <span class="skill-item">REST</span>
+                                    <span class="skill-item">GraphQL</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="skill-box">
+                                <h5 class="skill-category mb-3">
+                                    <i class="bi bi-database me-2"></i>Databases & Analytics
+                                </h5>
+                                <div class="skill-items">
+                                    <span class="skill-item">MySQL</span>
+                                    <span class="skill-item">MongoDB</span>
+                                    <span class="skill-item">ChromaDB</span>
+                                    <span class="skill-item">Elasticsearch</span>
+                                    <span class="skill-item">Spark</span>
+                                    <span class="skill-item">Databricks</span>
+                                    <span class="skill-item">Tableau</span>
+                                    <span class="skill-item">Pandas</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="skill-box">
+                                <h5 class="skill-category mb-3">
+                                    <i class="bi bi-tools me-2"></i>Tools & Methodologies
+                                </h5>
+                                <div class="skill-items">
+                                    <span class="skill-item">Agile</span>
+                                    <span class="skill-item">Scrum</span>
+                                    <span class="skill-item">Jira</span>
+                                    <span class="skill-item">Git</span>
+                                    <span class="skill-item">Google Analytics</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="skill-box">
+                                <h5 class="skill-category mb-3">
+                                    <i class="bi bi-filetype-html me-2"></i>Web Technologies
+                                </h5>
+                                <div class="skill-items">
+                                    <span class="skill-item">HTML5</span>
+                                    <span class="skill-item">CSS3</span>
+                                    <span class="skill-item">Bootstrap</span>
+                                    <span class="skill-item">Responsive Design</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- End Skills Tab -->
+
         </div>
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
+    <script>
+        function switchTab(tab, btn) {
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + tab).classList.add('active');
+            btn.classList.add('active');
+        }
+    </script>
 </body>
 </html>
-
